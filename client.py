@@ -50,9 +50,11 @@ def main():
             TIME_INTERVAL = TIME_INTERVAL - int(time_end - time_start) + 60
             ts = time_end - int(time_end - time_start) + 60
         else:
-            time_start = ts
+            TIME_INTERVAL = 60
+            ts = time_end
+        time_start = ts
         send_dict = get_result(start, end)
-        send_dict['timestamp'] = time_end
+        send_dict['timestamp'] = ts
         send_dict['host'] = CLIENT_INFO
         sender.send(ujson.dumps(send_dict))
         start = end
