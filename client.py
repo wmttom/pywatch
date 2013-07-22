@@ -40,15 +40,23 @@ def get_result(start, end):
 
 def main():
     start = get_info()
+    global TIME_INTERVAL
+    time_start = time.time()    
     while True:
         time.sleep(TIME_INTERVAL)
         end = get_info()
-        ts = time.time()
+        time_end = time.time()
+        if int(time_end - time_start) != 60:
+            TIME_INTERVAL = TIME_INTERVAL - int(time_end - time_start) + 60
+            ts = time_end - int(time_end - time_start) + 60
+        else:
+            time_start = ts
         send_dict = get_result(start, end)
-        send_dict['timestamp'] = ts
+        send_dict['timestamp'] = time_end
         send_dict['host'] = CLIENT_INFO
         sender.send(ujson.dumps(send_dict))
         start = end
+
 
 if __name__ == '__main__':
     main()
