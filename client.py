@@ -55,7 +55,7 @@ def main():
             ts = time_end
         time_start = ts
         send_dict = get_result(start, end)
-        send_dict['timestamp'] = ts
+        send_dict['timestamp'] = int(ts)
         print ts
         send_dict['host'] = CLIENT_INFO
         sender.send(ujson.dumps(send_dict))
