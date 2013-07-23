@@ -47,14 +47,16 @@ def main():
         end = get_info()
         time_end = time.time()
         if int(time_end - time_start) != 60:
-            TIME_INTERVAL = TIME_INTERVAL - int(time_end - time_start) + 60
+            TIME_INTERVAL = 60 - int(time_end - time_start) + 60
             ts = time_end - int(time_end - time_start) + 60
+            print TIME_INTERVAL
         else:
             TIME_INTERVAL = 60
             ts = time_end
         time_start = ts
         send_dict = get_result(start, end)
         send_dict['timestamp'] = ts
+        print ts
         send_dict['host'] = CLIENT_INFO
         sender.send(ujson.dumps(send_dict))
         start = end
