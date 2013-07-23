@@ -41,14 +41,14 @@ def get_result(start, end):
 def main():
     start = get_info()
     global TIME_INTERVAL
-    time_start = time.time()    
+    time_start = int(time.time())
     while True:
         time.sleep(TIME_INTERVAL)
         end = get_info()
-        time_end = time.time()
-        if int(time_end - time_start) != 60:
-            TIME_INTERVAL = 60 - int(time_end - time_start) + 60
-            ts = time_end - int(time_end - time_start) + 60
+        time_end = int(time.time())
+        if (time_end - time_start) != 60:
+            TIME_INTERVAL = 60 - int(time_end) + int(time_start) + 60
+            ts = time_end - int(time_end) + int(time_start) + 60
             print TIME_INTERVAL
         else:
             TIME_INTERVAL = 60
